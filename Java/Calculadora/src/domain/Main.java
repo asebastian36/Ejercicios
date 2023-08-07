@@ -1,6 +1,6 @@
 package domain;
 
-import ui.CalculadoraController;
+import controllers.Calculadora;
 
 
 /**
@@ -10,7 +10,7 @@ import ui.CalculadoraController;
 
 public class Main {
     public static void main(String[] args) {
-        CalculadoraController calculadora = new CalculadoraController();
+        Calculadora calculadora = new Calculadora();
         calculadora.inicio();
     }
 }

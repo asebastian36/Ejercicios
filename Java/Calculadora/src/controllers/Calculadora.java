@@ -1,7 +1,8 @@
-package ui;
+package controllers;
 
-import entities.Operacion;
-import java.text.DecimalFormat;
+import domain.Operacion;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Scanner;
 import services.CalculadoraService;
 
@@ -9,7 +10,7 @@ import services.CalculadoraService;
  *
  * @author angel
  */
-public class CalculadoraController {
+public class Calculadora {
 
     private Operacion op = new Operacion();
 
@@ -20,7 +21,6 @@ public class CalculadoraController {
 
         this.operaciones();
         this.redondear();
-        System.out.println("El resultado es " + op.getResultado());
     }
 
     public void operaciones() {
@@ -72,7 +72,6 @@ public class CalculadoraController {
                 valido2 = true;
             }
         }
-
         op.setOperador1(Double.parseDouble(operador1));
         op.setOperador2(Double.parseDouble(operador2));
     }
@@ -85,7 +84,7 @@ public class CalculadoraController {
 
         boolean valido = false;
         while (!valido) {
-            if (!comprobacionOperador(operacion)) {
+            if (!isOperador(operacion)) {
                 System.out.println("El operador debe ser +, -, * o /:");
                 operacion = scanner.next();
             } else {
@@ -96,7 +95,7 @@ public class CalculadoraController {
         }
     }
 
-    private boolean comprobacionOperador(String operador) {
+    private boolean isOperador(String operador) {
         if (operador.length() != 1) {
             return false;
         }
@@ -107,8 +106,8 @@ public class CalculadoraController {
     }
 
     private void redondear() {
-        DecimalFormat decimalFormat = new DecimalFormat("0.00");
-        String formattedDouble = decimalFormat.format(op.getResultado());
-        op.setResultado(Double.parseDouble(formattedDouble));
+        double resultado = op.getResultado();
+        String formatoSalida = String.format("%.2f", resultado);
+        System.out.println("El resultado es: " + formatoSalida);
     }
 }
