@@ -107,7 +107,14 @@ public class Calculadora {
 
     private void redondear() {
         double resultado = op.getResultado();
+        //  redondear
+        BigDecimal bd = new BigDecimal(resultado);
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        resultado = bd.doubleValue();
+
+        //  mandar a salida
         String formatoSalida = String.format("%.2f", resultado);
+        op.setResultado(resultado);
         System.out.println("El resultado es: " + formatoSalida);
     }
 }
